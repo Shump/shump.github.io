@@ -6414,184 +6414,6 @@ var _elm_lang$core$Array$repeat = F2(
 			_elm_lang$core$Basics$always(e));
 	});
 var _elm_lang$core$Array$Array = {ctor: 'Array'};
-var _elm_community$maybe_extra$Maybe_Extra$foldrValues = F2(
-	function (item, list) {
-		var _p0 = item;
-		if (_p0.ctor === 'Nothing') {
-			return list;
-		} else {
-			return {ctor: '::', _0: _p0._0, _1: list};
-		}
-	});
-var _elm_community$maybe_extra$Maybe_Extra$values = A2(
-	_elm_lang$core$List$foldr,
-	_elm_community$maybe_extra$Maybe_Extra$foldrValues,
-	{ctor: '[]'});
-var _elm_community$maybe_extra$Maybe_Extra$filter = F2(
-	function (f, m) {
-		var _p1 = A2(_elm_lang$core$Maybe$map, f, m);
-		if ((_p1.ctor === 'Just') && (_p1._0 === true)) {
-			return m;
-		} else {
-			return _elm_lang$core$Maybe$Nothing;
-		}
-	});
-var _elm_community$maybe_extra$Maybe_Extra$traverseArray = function (f) {
-	var step = F2(
-		function (e, acc) {
-			var _p2 = f(e);
-			if (_p2.ctor === 'Nothing') {
-				return _elm_lang$core$Maybe$Nothing;
-			} else {
-				return A2(
-					_elm_lang$core$Maybe$map,
-					_elm_lang$core$Array$push(_p2._0),
-					acc);
-			}
-		});
-	return A2(
-		_elm_lang$core$Array$foldl,
-		step,
-		_elm_lang$core$Maybe$Just(_elm_lang$core$Array$empty));
-};
-var _elm_community$maybe_extra$Maybe_Extra$combineArray = _elm_community$maybe_extra$Maybe_Extra$traverseArray(_elm_lang$core$Basics$identity);
-var _elm_community$maybe_extra$Maybe_Extra$traverse = function (f) {
-	var step = F2(
-		function (e, acc) {
-			var _p3 = f(e);
-			if (_p3.ctor === 'Nothing') {
-				return _elm_lang$core$Maybe$Nothing;
-			} else {
-				return A2(
-					_elm_lang$core$Maybe$map,
-					F2(
-						function (x, y) {
-							return {ctor: '::', _0: x, _1: y};
-						})(_p3._0),
-					acc);
-			}
-		});
-	return A2(
-		_elm_lang$core$List$foldr,
-		step,
-		_elm_lang$core$Maybe$Just(
-			{ctor: '[]'}));
-};
-var _elm_community$maybe_extra$Maybe_Extra$combine = _elm_community$maybe_extra$Maybe_Extra$traverse(_elm_lang$core$Basics$identity);
-var _elm_community$maybe_extra$Maybe_Extra$maybeToArray = function (m) {
-	var _p4 = m;
-	if (_p4.ctor === 'Nothing') {
-		return _elm_lang$core$Array$empty;
-	} else {
-		return A2(_elm_lang$core$Array$repeat, 1, _p4._0);
-	}
-};
-var _elm_community$maybe_extra$Maybe_Extra$maybeToList = function (m) {
-	var _p5 = m;
-	if (_p5.ctor === 'Nothing') {
-		return {ctor: '[]'};
-	} else {
-		return {
-			ctor: '::',
-			_0: _p5._0,
-			_1: {ctor: '[]'}
-		};
-	}
-};
-var _elm_community$maybe_extra$Maybe_Extra$orElse = F2(
-	function (ma, mb) {
-		var _p6 = mb;
-		if (_p6.ctor === 'Nothing') {
-			return ma;
-		} else {
-			return mb;
-		}
-	});
-var _elm_community$maybe_extra$Maybe_Extra$orElseLazy = F2(
-	function (fma, mb) {
-		var _p7 = mb;
-		if (_p7.ctor === 'Nothing') {
-			return fma(
-				{ctor: '_Tuple0'});
-		} else {
-			return mb;
-		}
-	});
-var _elm_community$maybe_extra$Maybe_Extra$orLazy = F2(
-	function (ma, fmb) {
-		var _p8 = ma;
-		if (_p8.ctor === 'Nothing') {
-			return fmb(
-				{ctor: '_Tuple0'});
-		} else {
-			return ma;
-		}
-	});
-var _elm_community$maybe_extra$Maybe_Extra$or = F2(
-	function (ma, mb) {
-		var _p9 = ma;
-		if (_p9.ctor === 'Nothing') {
-			return mb;
-		} else {
-			return ma;
-		}
-	});
-var _elm_community$maybe_extra$Maybe_Extra$prev = _elm_lang$core$Maybe$map2(_elm_lang$core$Basics$always);
-var _elm_community$maybe_extra$Maybe_Extra$next = _elm_lang$core$Maybe$map2(
-	_elm_lang$core$Basics$flip(_elm_lang$core$Basics$always));
-var _elm_community$maybe_extra$Maybe_Extra$andMap = _elm_lang$core$Maybe$map2(
-	F2(
-		function (x, y) {
-			return y(x);
-		}));
-var _elm_community$maybe_extra$Maybe_Extra$unpack = F3(
-	function (d, f, m) {
-		var _p10 = m;
-		if (_p10.ctor === 'Nothing') {
-			return d(
-				{ctor: '_Tuple0'});
-		} else {
-			return f(_p10._0);
-		}
-	});
-var _elm_community$maybe_extra$Maybe_Extra$unwrap = F3(
-	function (d, f, m) {
-		var _p11 = m;
-		if (_p11.ctor === 'Nothing') {
-			return d;
-		} else {
-			return f(_p11._0);
-		}
-	});
-var _elm_community$maybe_extra$Maybe_Extra$isJust = function (m) {
-	var _p12 = m;
-	if (_p12.ctor === 'Nothing') {
-		return false;
-	} else {
-		return true;
-	}
-};
-var _elm_community$maybe_extra$Maybe_Extra$isNothing = function (m) {
-	var _p13 = m;
-	if (_p13.ctor === 'Nothing') {
-		return true;
-	} else {
-		return false;
-	}
-};
-var _elm_community$maybe_extra$Maybe_Extra$join = function (mx) {
-	var _p14 = mx;
-	if (_p14.ctor === 'Just') {
-		return _p14._0;
-	} else {
-		return _elm_lang$core$Maybe$Nothing;
-	}
-};
-var _elm_community$maybe_extra$Maybe_Extra_ops = _elm_community$maybe_extra$Maybe_Extra_ops || {};
-_elm_community$maybe_extra$Maybe_Extra_ops['?'] = F2(
-	function (mx, x) {
-		return A2(_elm_lang$core$Maybe$withDefault, x, mx);
-	});
 var _elm_lang$core$Task$onError = _elm_lang$core$Native_Scheduler.onError;
 var _elm_lang$core$Task$andThen = _elm_lang$core$Native_Scheduler.andThen;
 var _elm_lang$core$Task$spawnCmd = F2(
@@ -14816,126 +14638,6 @@ var _user$project$Game_SvgDefs$supportPositions = function (size) {
 			return {ctor: '[]'};
 	}
 };
-var _user$project$Game_SvgDefs$whiteTileSymbol = A2(
-	_elm_lang$svg$Svg$symbol,
-	{
-		ctor: '::',
-		_0: _elm_lang$svg$Svg_Attributes$id('whiteTile'),
-		_1: {
-			ctor: '::',
-			_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 1 1'),
-			_1: {ctor: '[]'}
-		}
-	},
-	{
-		ctor: '::',
-		_0: A2(
-			_elm_lang$svg$Svg$rect,
-			{
-				ctor: '::',
-				_0: _elm_lang$svg$Svg_Attributes$x('0'),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$svg$Svg_Attributes$y('0'),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$svg$Svg_Attributes$width('1'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$svg$Svg_Attributes$height('1'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$svg$Svg_Attributes$fill('white'),
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				}
-			},
-			{ctor: '[]'}),
-		_1: {ctor: '[]'}
-	});
-var _user$project$Game_SvgDefs$whiteId = '#whiteTile';
-var _user$project$Game_SvgDefs$blackTileSymbol = A2(
-	_elm_lang$svg$Svg$symbol,
-	{
-		ctor: '::',
-		_0: _elm_lang$svg$Svg_Attributes$id('blackTile'),
-		_1: {
-			ctor: '::',
-			_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 1 1'),
-			_1: {ctor: '[]'}
-		}
-	},
-	{
-		ctor: '::',
-		_0: A2(
-			_elm_lang$svg$Svg$rect,
-			{
-				ctor: '::',
-				_0: _elm_lang$svg$Svg_Attributes$x('0'),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$svg$Svg_Attributes$y('0'),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$svg$Svg_Attributes$width('1'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$svg$Svg_Attributes$height('1'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$svg$Svg_Attributes$fill('black'),
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				}
-			},
-			{ctor: '[]'}),
-		_1: {ctor: '[]'}
-	});
-var _user$project$Game_SvgDefs$blackId = '#blackTile';
-var _user$project$Game_SvgDefs$emptyTileSymbol = A2(
-	_elm_lang$svg$Svg$symbol,
-	{
-		ctor: '::',
-		_0: _elm_lang$svg$Svg_Attributes$id('emptyTile'),
-		_1: {
-			ctor: '::',
-			_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 1 1'),
-			_1: {ctor: '[]'}
-		}
-	},
-	{
-		ctor: '::',
-		_0: A2(
-			_elm_lang$svg$Svg$rect,
-			{
-				ctor: '::',
-				_0: _elm_lang$svg$Svg_Attributes$x('0'),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$svg$Svg_Attributes$y('0'),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$svg$Svg_Attributes$width('1'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$svg$Svg_Attributes$height('1'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$svg$Svg_Attributes$opacity('0'),
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				}
-			},
-			{ctor: '[]'}),
-		_1: {ctor: '[]'}
-	});
-var _user$project$Game_SvgDefs$emptyId = '#emptyTile';
 var _user$project$Game_SvgDefs$height_ = function (value) {
 	return _elm_lang$svg$Svg_Attributes$height(
 		_elm_lang$core$Basics$toString(value));
@@ -15293,83 +14995,148 @@ var _user$project$Game_View$board = function (size) {
 		},
 		{ctor: '[]'});
 };
-var _user$project$Game_View$stoneId = function (stone) {
-	var _p0 = stone;
-	if (_p0.ctor === 'Black') {
-		return _user$project$Game_SvgDefs$blackId;
-	} else {
-		return _user$project$Game_SvgDefs$whiteId;
-	}
-};
-var _user$project$Game_View$pointId = function (point) {
-	var _p1 = point;
-	if (_p1.ctor === 'Empty') {
-		return _user$project$Game_SvgDefs$emptyId;
-	} else {
-		return _user$project$Game_View$stoneId(_p1._0);
-	}
-};
-var _user$project$Game_View$tile = F2(
-	function (game, _p2) {
-		var _p3 = _p2;
-		var _p6 = _p3._0._1;
-		var _p5 = _p3._0._0;
-		var boardId = function () {
-			var _p4 = _p3._1;
-			if (_p4.ctor === 'Empty') {
-				return _elm_lang$core$Maybe$Nothing;
-			} else {
-				return _elm_lang$core$Maybe$Just(
-					_user$project$Game_View$stoneId(_p4._0));
-			}
-		}();
-		var currentState = _wernerdegroot$listzipper$List_Zipper$current(game.history);
-		var nextTileId = _user$project$Game_View$stoneId(currentState.nextPlayer);
-		var pos_ = {x: _p5, y: _p6};
-		var isHovering = F2(
-			function (x, y) {
-				return _elm_lang$core$Native_Utils.eq(x, y);
-			})(pos_);
-		var hoveringId = A2(
-			_elm_lang$core$Maybe$map,
-			_elm_lang$core$Basics$always(nextTileId),
-			A2(_elm_community$maybe_extra$Maybe_Extra$filter, isHovering, game.hovering));
-		var sym = A2(_elm_community$maybe_extra$Maybe_Extra$or, boardId, hoveringId);
-		return A2(
-			_elm_lang$svg$Svg$use,
-			{
+var _user$project$Game_View$renderEmptyTile = function (_p0) {
+	var _p1 = _p0;
+	var _p2 = _p1;
+	return A2(
+		_elm_lang$svg$Svg$rect,
+		{
+			ctor: '::',
+			_0: _user$project$Game_SvgDefs$x_(_p1.x),
+			_1: {
 				ctor: '::',
-				_0: _user$project$Game_SvgDefs$x_(_p5),
+				_0: _user$project$Game_SvgDefs$y_(_p1.y),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Game_SvgDefs$y_(_p6),
+					_0: _user$project$Game_SvgDefs$width_(1),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Game_SvgDefs$width_(1),
+						_0: _user$project$Game_SvgDefs$height_(1),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Game_SvgDefs$height_(1),
+							_0: _elm_lang$svg$Svg_Attributes$fill('transparent'),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$svg$Svg_Attributes$xlinkHref(
-									A2(_elm_lang$core$Maybe$withDefault, _user$project$Game_SvgDefs$emptyId, sym)),
+								_0: _elm_lang$svg$Svg_Events$onMouseUp(
+									_user$project$Game_Msg$OnClick(_p2)),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$svg$Svg_Events$onClick(
-										_user$project$Game_Msg$OnClick(pos_)),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$svg$Svg_Events$onMouseOver(
-											_user$project$Game_Msg$OnEnter(pos_)),
-										_1: {ctor: '[]'}
-									}
+									_0: _elm_lang$svg$Svg_Events$onMouseOver(
+										_user$project$Game_Msg$OnEnter(_p2)),
+									_1: {ctor: '[]'}
 								}
 							}
 						}
 					}
 				}
-			},
-			{ctor: '[]'});
+			}
+		},
+		{ctor: '[]'});
+};
+var _user$project$Game_View$renderWhiteStone = function (_p3) {
+	var _p4 = _p3;
+	var _p5 = _p4;
+	return A2(
+		_elm_lang$svg$Svg$rect,
+		{
+			ctor: '::',
+			_0: _user$project$Game_SvgDefs$x_(_p4.x),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Game_SvgDefs$y_(_p4.y),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Game_SvgDefs$width_(1),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Game_SvgDefs$height_(1),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$fill('white'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Events$onMouseUp(
+									_user$project$Game_Msg$OnClick(_p5)),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Events$onMouseOver(
+										_user$project$Game_Msg$OnEnter(_p5)),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		{ctor: '[]'});
+};
+var _user$project$Game_View$renderBlackStone = function (_p6) {
+	var _p7 = _p6;
+	var _p8 = _p7;
+	return A2(
+		_elm_lang$svg$Svg$rect,
+		{
+			ctor: '::',
+			_0: _user$project$Game_SvgDefs$x_(_p7.x),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Game_SvgDefs$y_(_p7.y),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Game_SvgDefs$width_(1),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Game_SvgDefs$height_(1),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$fill('black'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Events$onMouseUp(
+									_user$project$Game_Msg$OnClick(_p8)),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$svg$Svg_Events$onMouseOver(
+										_user$project$Game_Msg$OnEnter(_p8)),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		{ctor: '[]'});
+};
+var _user$project$Game_View$renderStone = F2(
+	function (pos, player) {
+		var _p9 = player;
+		if (_p9.ctor === 'Black') {
+			return _user$project$Game_View$renderBlackStone(pos);
+		} else {
+			return _user$project$Game_View$renderWhiteStone(pos);
+		}
+	});
+var _user$project$Game_View$tile = F2(
+	function (game, _p10) {
+		var _p11 = _p10;
+		var currentState = _wernerdegroot$listzipper$List_Zipper$current(game.history);
+		var pos_ = {x: _p11._0._0, y: _p11._0._1};
+		var _p12 = {ctor: '_Tuple2', _0: _p11._1, _1: game.hovering};
+		if (_p12._0.ctor === 'Occupied') {
+			if (_p12._0._0.ctor === 'Black') {
+				return _user$project$Game_View$renderBlackStone(pos_);
+			} else {
+				return _user$project$Game_View$renderWhiteStone(pos_);
+			}
+		} else {
+			if (_p12._1.ctor === 'Just') {
+				return _elm_lang$core$Native_Utils.eq(_p12._1._0, pos_) ? A2(_user$project$Game_View$renderStone, pos_, currentState.nextPlayer) : _user$project$Game_View$renderEmptyTile(pos_);
+			} else {
+				return _user$project$Game_View$renderEmptyTile(pos_);
+			}
+		}
 	});
 var _user$project$Game_View$tiles = function (game) {
 	var currentState = _wernerdegroot$listzipper$List_Zipper$current(game.history);
@@ -15387,20 +15154,8 @@ var _user$project$Game_View$renderBoard = function (game) {
 			_0: _user$project$Game_SvgDefs$boardSymbol(game.size),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Game_SvgDefs$emptyTileSymbol,
-				_1: {
-					ctor: '::',
-					_0: _user$project$Game_SvgDefs$blackTileSymbol,
-					_1: {
-						ctor: '::',
-						_0: _user$project$Game_SvgDefs$whiteTileSymbol,
-						_1: {
-							ctor: '::',
-							_0: _user$project$Game_View$board(game.size),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
+				_0: _user$project$Game_View$board(game.size),
+				_1: {ctor: '[]'}
 			}
 		},
 		_user$project$Game_View$tiles(game));
